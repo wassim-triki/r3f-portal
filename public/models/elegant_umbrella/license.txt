@@ -1,0 +1,11 @@
+Model Information:
+* title:	Elegant umbrella
+* source:	https://sketchfab.com/3d-models/elegant-umbrella-ca9bb8c8ffc640c6a9be8ad5f341c9c4
+* author:	Araon (https://sketchfab.com/araon)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Elegant umbrella" (https://sketchfab.com/3d-models/elegant-umbrella-ca9bb8c8ffc640c6a9be8ad5f341c9c4) by Araon (https://sketchfab.com/araon) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
