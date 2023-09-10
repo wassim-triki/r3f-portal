@@ -32,18 +32,20 @@ export const Experience = () => {
         rotation-y={0.7}
         name={"fuck"}
         id="01"
-        bg="#014E83"
+        bg="#135BA4"
       >
         <FrameScene color="#26547c" />
+        {/* <FrameScene /> */}
       </Frame>
       <Frame
         texture={"/textures/desert.jpeg"}
         position-x={0}
         name={"this"}
         id="02"
-        bg="#EE527A"
+        bg="#EC5D99"
       >
         <FrameScene color="#ef476f" />
+        {/* <FrameScene /> */}
       </Frame>
 
       <Frame
@@ -52,16 +54,10 @@ export const Experience = () => {
         rotation-y={-0.7}
         name={"shit"}
         id="03"
-        bg="#E5D289"
+        bg="#E3D7A1"
       >
-        {" "}
-        <SpotLight
-          castShadow
-          args={["#fff", 10, 7, degToRad(45), 0.4, 0.1]}
-          // position={[-3, 1.5, -1]}
-          // rotation-y={degToRad(45)}
-        />
         <FrameScene color="#ffd166" />
+        {/* <FrameScene /> */}
       </Frame>
       {/* <Frame
         texture={"/textures/desert.jpeg"}
@@ -76,16 +72,45 @@ export const Experience = () => {
   );
 };
 
-const FrameScene = ({ color }) => {
+const FrameScene = ({ color = "#fff" }) => {
+  const targetRef = useRef(null);
+  const spotLightRef = useRef(null);
+  const defaultTarget = new THREE.Vector3(0, 0, 0);
+  useEffect(() => {
+    if (targetRef.current && spotLightRef.current) {
+      spotLightRef.current.target = targetRef.current;
+
+      console.log(spotLightRef.current);
+    }
+  }, [targetRef.current, spotLightRef.current]);
   return (
     <>
-      <mesh position={[0, -1, -1.5]} castShadow>
+      <mesh ref={targetRef} position={[0, -0.5, -1]} castShadow>
         <boxGeometry />
-        <meshNormalMaterial />
+        <meshStandardMaterial color={color} />
       </mesh>
-      <mesh position={[0, -1.5, -1.5]} rotation-x={-1.57} receiveShadow>
-        <planeGeometry args={[10, 10]} />
-        <meshBasicMaterial color={color} />
+      <spotLight
+        castShadow
+        ref={spotLightRef}
+        args={["#fff", 0.2, 7, degToRad(80), 0.5, 0.6]}
+        position={[1, 1.5, -2]}
+      />
+      <spotLight
+        castShadow
+        ref={spotLightRef}
+        args={["#fff", 0.2, 7, degToRad(80), 0.5, 0.6]}
+        position={[-1, 1.5, -2]}
+      />
+      <spotLight
+        castShadow
+        ref={spotLightRef}
+        args={["#fff", 0.2, 7, degToRad(80), 0.5, 0.5]}
+        position={[0, 1.5, 1]}
+      />
+      <mesh position={[0, -1, -1.5]} rotation-x={-1.57} receiveShadow>
+        <planeGeometry args={[20, 20]} />
+        {/* <meshBasicMaterial color={color} /> */}
+        <meshStandardMaterial color={color} />
       </mesh>
     </>
   );
@@ -112,9 +137,6 @@ const Frame = ({ children, texture, name, id, bg = "#000", ...props }) => {
     navigate(`/item/${id}`);
   };
 
-  useEffect(() => {
-    console.log(sphereMeshRef.current);
-  }, [sphereMeshRef.current]);
   function easeInOutCubic(t) {
     return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   }
@@ -175,7 +197,7 @@ const Frame = ({ children, texture, name, id, bg = "#000", ...props }) => {
 };
 
 const Rig = ({
-  position = new THREE.Vector3(0, 0, 5),
+  position = new THREE.Vector3(0, 0, 4),
   focus = new THREE.Vector3(0, 0, 0),
 }) => {
   const { controls, scene } = useThree();
@@ -187,7 +209,6 @@ const Rig = ({
       frame.parent.localToWorld(focus.set(0, 0, -2));
     }
     controls?.setLookAt(...position.toArray(), ...focus.toArray(), true);
-    console.log(id);
   }, [id, controls]);
   return (
     <CameraControls makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 2} />

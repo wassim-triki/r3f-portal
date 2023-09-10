@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <Canvas shadows camera={{ fov: 75, position: [0, 0, 20] }}>
-        <color attach="background" args={["#C3DFE0"]} />
+        <color attach="background" args={["#ececec"]} />
         {/* ececec */}
         <Experience />
       </Canvas>
