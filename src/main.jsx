@@ -4,7 +4,6 @@ import App from "./App";
 import "./index.css";
 
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { Experience } from "./components/Experience";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

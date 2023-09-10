@@ -1,19 +1,16 @@
 import {
   CameraControls,
   Environment,
-  Gltf,
   MeshPortalMaterial,
-  OrbitControls,
   RoundedBox,
-  SpotLight,
   Text,
   useTexture,
 } from "@react-three/drei";
 import * as THREE from "three";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { easing } from "maath";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const Experience = () => {
   return (
@@ -27,7 +24,7 @@ export const Experience = () => {
       <Rig />
 
       <Frame
-        texture={"/textures/ionia.jpg"}
+        // texture={"/textures/ionia.jpg"}
         position-x={-2.5}
         rotation-y={0.7}
         name={"fuck"}
@@ -38,7 +35,7 @@ export const Experience = () => {
         {/* <FrameScene /> */}
       </Frame>
       <Frame
-        texture={"/textures/desert.jpeg"}
+        // texture={"/textures/desert.jpeg"}
         position-x={0}
         name={"this"}
         id="02"
@@ -49,7 +46,7 @@ export const Experience = () => {
       </Frame>
 
       <Frame
-        texture={"/textures/purple.jpeg"}
+        // texture={"/textures/purple.jpeg"}
         position-x={2.5}
         rotation-y={-0.7}
         name={"shit"}
@@ -120,7 +117,7 @@ function degToRad(deg) {
 }
 
 const Frame = ({ children, texture, name, id, bg = "#000", ...props }) => {
-  const map = useTexture(texture);
+  // const map = useTexture(texture);
 
   const portalRef = useRef(null);
 

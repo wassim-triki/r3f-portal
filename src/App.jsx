@@ -1,17 +1,8 @@
 import { Canvas } from "@react-three/fiber";
 import { Experience } from "./components/Experience";
-import {
-  Link,
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
-import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 
 function App() {
-  const navigate = useNavigate();
   const { id } = useParams();
 
   return (
@@ -26,7 +17,6 @@ function App() {
         style={{ position: "absolute", top: 40, left: 40, fontSize: "13px" }}
         href="#"
         to={"/"}
-        // onClick={() => navigate("/")}
       >
         {id ? "< back" : "double click to enter portal"}
       </Link>
