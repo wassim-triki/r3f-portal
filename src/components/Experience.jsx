@@ -8,10 +8,10 @@ import {
   useTexture,
 } from "@react-three/drei";
 import * as THREE from "three";
-import { Stone } from "./Stone";
 import { useLayoutEffect, useRef, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { easing } from "maath";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const Experience = () => {
   const [aciveFrame, setActiveFrame] = useState(null);
@@ -19,23 +19,23 @@ export const Experience = () => {
   const scene = useThree((state) => state.scene);
   const cameraCtrlsRef = useRef(null);
 
-  useLayoutEffect(() => {
-    if (aciveFrame) {
-      const targetPosition = new THREE.Vector3();
-      scene.getObjectByName(aciveFrame).getWorldPosition(targetPosition);
-      cameraCtrlsRef.current.setLookAt(
-        0,
-        0.5,
-        1,
-        targetPosition.x,
-        targetPosition.y,
-        targetPosition.z,
-        true
-      );
-    } else {
-      cameraCtrlsRef.current.setLookAt(0, 0, 4, 0, 0, 0, true);
-    }
-  }, [aciveFrame]);
+  // useLayoutEffect(() => {
+  //   if (aciveFrame) {
+  //     const targetPosition = new THREE.Vector3();
+  //     scene.getObjectByName(aciveFrame).getWorldPosition(targetPosition);
+  //     cameraCtrlsRef.current.setLookAt(
+  //       0,
+  //       0.5,
+  //       1,
+  //       targetPosition.x,
+  //       targetPosition.y,
+  //       targetPosition.z,
+  //       true
+  //     );
+  //   } else {
+  //     cameraCtrlsRef.current.setLookAt(0, 0, 4, 0, 0, 0, true);
+  //   }
+  // }, [aciveFrame]);
   return (
     <>
       <ambientLight intensity={0.5} />
@@ -50,6 +50,7 @@ export const Experience = () => {
         aciveFrame={aciveFrame}
         setActiveFrame={setActiveFrame}
         name={"fuck"}
+        id="01"
       >
         <mesh position-y={-0.8}>
           <boxGeometry />
@@ -62,6 +63,7 @@ export const Experience = () => {
         aciveFrame={aciveFrame}
         setActiveFrame={setActiveFrame}
         name={"this"}
+        id="02"
       >
         <mesh position-y={-0.8}>
           <boxGeometry />
@@ -75,6 +77,7 @@ export const Experience = () => {
         aciveFrame={aciveFrame}
         setActiveFrame={setActiveFrame}
         name={"shit"}
+        id="03"
       >
         <mesh position-y={-0.8}>
           <boxGeometry />
@@ -91,6 +94,7 @@ const Frame = ({
   aciveFrame,
   setActiveFrame,
   name,
+  id,
   ...props
 }) => {
   const map = useTexture(texture);
@@ -98,6 +102,13 @@ const Frame = ({
   const isActive = aciveFrame === name;
 
   const portalRef = useRef(null);
+
+  const navigate = useNavigate();
+
+  const handleDoubleClick = (e) => {
+    // e.stopPropagation();
+    navigate(`item/${id}`);
+  };
 
   useFrame((_state, delta) => {
     easing.damp(portalRef.current, "blend", isActive ? 1 : 0, 0.2, delta);
@@ -119,7 +130,7 @@ const Frame = ({
         args={[2, 3, 0.1]}
         name={name}
         radius={0.1}
-        onDoubleClick={() => setActiveFrame(isActive ? null : name)}
+        onDoubleClick={handleDoubleClick}
       >
         <MeshPortalMaterial ref={portalRef} side={THREE.DoubleSide}>
           <Environment preset="sunset" />
