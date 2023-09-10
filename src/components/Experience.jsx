@@ -1,9 +1,11 @@
 import {
   CameraControls,
   Environment,
+  Gltf,
   MeshPortalMaterial,
   OrbitControls,
   RoundedBox,
+  SpotLight,
   Text,
   useTexture,
 } from "@react-three/drei";
@@ -30,40 +32,69 @@ export const Experience = () => {
         rotation-y={0.7}
         name={"fuck"}
         id="01"
+        bg="#014E83"
       >
-        <mesh position={[0, -1, -1.5]}>
-          <boxGeometry />
-          <meshNormalMaterial />
-        </mesh>
+        <FrameScene color="#26547c" />
       </Frame>
       <Frame
         texture={"/textures/desert.jpeg"}
         position-x={0}
         name={"this"}
         id="02"
+        bg="#EE527A"
       >
-        <mesh position={[0, -1, -1.5]}>
-          <boxGeometry />
-          <meshNormalMaterial />
-        </mesh>
+        <FrameScene color="#ef476f" />
       </Frame>
+
       <Frame
         texture={"/textures/purple.jpeg"}
         position-x={2.5}
         rotation-y={-0.7}
         name={"shit"}
         id="03"
+        bg="#E5D289"
       >
-        <mesh position={[0, -1, -1.5]}>
-          <boxGeometry />
-          <meshNormalMaterial />
-        </mesh>
+        {" "}
+        <SpotLight
+          castShadow
+          args={["#fff", 10, 7, degToRad(45), 0.4, 0.1]}
+          // position={[-3, 1.5, -1]}
+          // rotation-y={degToRad(45)}
+        />
+        <FrameScene color="#ffd166" />
       </Frame>
+      {/* <Frame
+        texture={"/textures/desert.jpeg"}
+        position-x={0}
+        name={"this"}
+        id="02"
+        bg="#d1d1ca"
+      >
+        <Gltf src="/models/still.glb" scale={2} position={[0, -0.8, -4]} />
+      </Frame> */}
     </>
   );
 };
 
-const Frame = ({ children, texture, name, id, ...props }) => {
+const FrameScene = ({ color }) => {
+  return (
+    <>
+      <mesh position={[0, -1, -1.5]} castShadow>
+        <boxGeometry />
+        <meshNormalMaterial />
+      </mesh>
+      <mesh position={[0, -1.5, -1.5]} rotation-x={-1.57} receiveShadow>
+        <planeGeometry args={[10, 10]} />
+        <meshBasicMaterial color={color} />
+      </mesh>
+    </>
+  );
+};
+function degToRad(deg) {
+  return deg * (Math.PI / 180);
+}
+
+const Frame = ({ children, texture, name, id, bg = "#000", ...props }) => {
   const map = useTexture(texture);
 
   const portalRef = useRef(null);
@@ -129,13 +160,14 @@ const Frame = ({ children, texture, name, id, ...props }) => {
           side={THREE.DoubleSide}
         >
           <Environment preset="sunset" />
-          {/* <ambientLight intensity={0.5} /> */}
+          <ambientLight intensity={0.5} />
 
           {children}
           <mesh ref={sphereMeshRef}>
-            <sphereGeometry args={[1, 64, 64]} />
-            <meshStandardMaterial map={map} side={THREE.BackSide} />
+            {/* <sphereGeometry args={[1, 64, 64]} />
+            <meshStandardMaterial map={map} side={THREE.BackSide} /> */}
           </mesh>
+          <color attach="background" args={[bg]} />
         </MeshPortalMaterial>
       </RoundedBox>
     </group>
