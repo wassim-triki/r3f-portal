@@ -1,6 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import { Experience } from "./components/Experience";
 import {
+  Link,
   Route,
   Routes,
   useLocation,
@@ -21,13 +22,14 @@ function App() {
         <Experience />
       </Canvas>
 
-      <a
+      <Link
         style={{ position: "absolute", top: 40, left: 40, fontSize: "13px" }}
         href="#"
-        onClick={() => navigate("/")}
+        to={"/"}
+        // onClick={() => navigate("/")}
       >
         {id ? "< back" : "double click to enter portal"}
-      </a>
+      </Link>
     </>
   );
 }
