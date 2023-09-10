@@ -8,10 +8,10 @@ import {
   useTexture,
 } from "@react-three/drei";
 import * as THREE from "three";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { easing } from "maath";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export const Experience = () => {
   const [aciveFrame, setActiveFrame] = useState(null);
@@ -42,7 +42,10 @@ export const Experience = () => {
       <Environment preset="sunset" />
 
       {/* <OrbitControls /> */}
-      <CameraControls ref={cameraCtrlsRef} />
+      {/* <CameraControls ref={cameraCtrlsRef} /> */}
+
+      <Rig />
+
       <Frame
         texture={"/textures/ionia.jpg"}
         position-x={-2.5}
@@ -52,7 +55,7 @@ export const Experience = () => {
         name={"fuck"}
         id="01"
       >
-        <mesh position-y={-0.8}>
+        <mesh position={[0, -1, -1.5]}>
           <boxGeometry />
           <meshNormalMaterial />
         </mesh>
@@ -65,7 +68,7 @@ export const Experience = () => {
         name={"this"}
         id="02"
       >
-        <mesh position-y={-0.8}>
+        <mesh position={[0, -1, -1.5]}>
           <boxGeometry />
           <meshNormalMaterial />
         </mesh>
@@ -79,7 +82,7 @@ export const Experience = () => {
         name={"shit"}
         id="03"
       >
-        <mesh position-y={-0.8}>
+        <mesh position={[0, -1, -1.5]}>
           <boxGeometry />
           <meshNormalMaterial />
         </mesh>
@@ -104,10 +107,11 @@ const Frame = ({
   const portalRef = useRef(null);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleDoubleClick = (e) => {
     // e.stopPropagation();
-    navigate(`item/${id}`);
+    navigate(`/item/${id}`);
   };
 
   useFrame((_state, delta) => {
@@ -128,7 +132,9 @@ const Frame = ({
 
       <RoundedBox
         args={[2, 3, 0.1]}
-        name={name}
+        name={id}
+        // name={name}
+
         radius={0.1}
         onDoubleClick={handleDoubleClick}
       >
@@ -145,4 +151,22 @@ const Frame = ({
       </RoundedBox>
     </group>
   );
+};
+
+const Rig = ({
+  position = new THREE.Vector3(0, 0, 5),
+  focus = new THREE.Vector3(0, 0, 0),
+}) => {
+  const { controls, scene } = useThree();
+  const { id } = useParams();
+  useEffect(() => {
+    const frame = scene.getObjectByName(id);
+    if (frame) {
+      frame.parent.localToWorld(position.set(0, 0.5, 0.25));
+      frame.parent.localToWorld(focus.set(0, 0, -2));
+    }
+    controls?.setLookAt(...position.toArray(), ...focus.toArray(), true);
+    console.log(controls, frame?.parent.position);
+  }, [id, controls]);
+  return <CameraControls makeDefault />;
 };

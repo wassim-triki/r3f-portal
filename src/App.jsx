@@ -1,15 +1,23 @@
 import { Canvas } from "@react-three/fiber";
 import { Experience } from "./components/Experience";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
+import { useEffect } from "react";
 
 function App() {
   const navigate = useNavigate();
-  const { pathname } = useLocation();
+  const { id } = useParams();
 
   return (
     <>
       <Canvas shadows camera={{ fov: 75, position: [0, 0, 20] }}>
         <color attach="background" args={["#ececec"]} />
+
         <Experience />
       </Canvas>
 
@@ -18,7 +26,7 @@ function App() {
         href="#"
         onClick={() => navigate("/")}
       >
-        {pathname.length > 1 ? "< back" : "double click to enter portal"}
+        {id ? "< back" : "double click to enter portal"}
       </a>
     </>
   );
