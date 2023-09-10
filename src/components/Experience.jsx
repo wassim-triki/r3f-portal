@@ -14,28 +14,6 @@ import { easing } from "maath";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export const Experience = () => {
-  const [aciveFrame, setActiveFrame] = useState(null);
-
-  const scene = useThree((state) => state.scene);
-  const cameraCtrlsRef = useRef(null);
-
-  // useLayoutEffect(() => {
-  //   if (aciveFrame) {
-  //     const targetPosition = new THREE.Vector3();
-  //     scene.getObjectByName(aciveFrame).getWorldPosition(targetPosition);
-  //     cameraCtrlsRef.current.setLookAt(
-  //       0,
-  //       0.5,
-  //       1,
-  //       targetPosition.x,
-  //       targetPosition.y,
-  //       targetPosition.z,
-  //       true
-  //     );
-  //   } else {
-  //     cameraCtrlsRef.current.setLookAt(0, 0, 4, 0, 0, 0, true);
-  //   }
-  // }, [aciveFrame]);
   return (
     <>
       <ambientLight intensity={0.5} />
@@ -50,8 +28,6 @@ export const Experience = () => {
         texture={"/textures/ionia.jpg"}
         position-x={-2.5}
         rotation-y={0.7}
-        aciveFrame={aciveFrame}
-        setActiveFrame={setActiveFrame}
         name={"fuck"}
         id="01"
       >
@@ -63,8 +39,6 @@ export const Experience = () => {
       <Frame
         texture={"/textures/desert.jpeg"}
         position-x={0}
-        aciveFrame={aciveFrame}
-        setActiveFrame={setActiveFrame}
         name={"this"}
         id="02"
       >
@@ -77,8 +51,6 @@ export const Experience = () => {
         texture={"/textures/purple.jpeg"}
         position-x={2.5}
         rotation-y={-0.7}
-        aciveFrame={aciveFrame}
-        setActiveFrame={setActiveFrame}
         name={"shit"}
         id="03"
       >
@@ -91,31 +63,44 @@ export const Experience = () => {
   );
 };
 
-const Frame = ({
-  children,
-  texture,
-  aciveFrame,
-  setActiveFrame,
-  name,
-  id,
-  ...props
-}) => {
+const Frame = ({ children, texture, name, id, ...props }) => {
   const map = useTexture(texture);
-
-  const isActive = aciveFrame === name;
 
   const portalRef = useRef(null);
 
+  const sphereMeshRef = useRef(null);
+
   const navigate = useNavigate();
-  const location = useLocation();
+
+  const params = useParams();
+
+  const isActive = params.id === id;
 
   const handleDoubleClick = (e) => {
-    // e.stopPropagation();
+    e.stopPropagation();
     navigate(`/item/${id}`);
   };
 
+  useEffect(() => {
+    console.log(sphereMeshRef.current);
+  }, [sphereMeshRef.current]);
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
   useFrame((_state, delta) => {
     easing.damp(portalRef.current, "blend", isActive ? 1 : 0, 0.2, delta);
+
+    // Calculate the target scale based on isActive
+    const large = new THREE.Vector3(100, 100, 100);
+    const small = new THREE.Vector3(0.1, 0.1, 0.1);
+    const defaultScale = new THREE.Vector3(5, 5, 5);
+
+    if (isActive) {
+      easing.damp3(sphereMeshRef.current.scale, large, 1, delta);
+    } else {
+      easing.damp3(sphereMeshRef.current.scale, defaultScale, 0.2, delta);
+    }
   });
   return (
     <group {...props}>
@@ -138,13 +123,17 @@ const Frame = ({
         radius={0.1}
         onDoubleClick={handleDoubleClick}
       >
-        <MeshPortalMaterial ref={portalRef} side={THREE.DoubleSide}>
+        <MeshPortalMaterial
+          ref={portalRef}
+          // blend={id === params.id ? 1 : 0}
+          side={THREE.DoubleSide}
+        >
           <Environment preset="sunset" />
           {/* <ambientLight intensity={0.5} /> */}
 
           {children}
-          <mesh>
-            <sphereGeometry args={[5, 64, 64]} />
+          <mesh ref={sphereMeshRef}>
+            <sphereGeometry args={[1, 64, 64]} />
             <meshStandardMaterial map={map} side={THREE.BackSide} />
           </mesh>
         </MeshPortalMaterial>
@@ -166,7 +155,7 @@ const Rig = ({
       frame.parent.localToWorld(focus.set(0, 0, -2));
     }
     controls?.setLookAt(...position.toArray(), ...focus.toArray(), true);
-    console.log(controls, frame?.parent.position);
+    console.log(id);
   }, [id, controls]);
   return <CameraControls makeDefault />;
 };
