@@ -157,5 +157,7 @@ const Rig = ({
     controls?.setLookAt(...position.toArray(), ...focus.toArray(), true);
     console.log(id);
   }, [id, controls]);
-  return <CameraControls makeDefault />;
+  return (
+    <CameraControls makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 2} />
+  );
 };
