@@ -5,10 +5,11 @@ import {
   MeshPortalMaterial,
   RoundedBox,
   Text,
+  useCursor,
   useTexture,
 } from "@react-three/drei";
 import * as THREE from "three";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { easing } from "maath";
 import { useNavigate, useParams } from "react-router-dom";
@@ -154,6 +155,10 @@ const Frame = ({ children, texture, name, id, bg = "#000", ...props }) => {
       easing.damp3(sphereMeshRef.current.scale, defaultScale, 0.2, delta);
     }
   });
+
+  const [hovering, setHovering] = useState(false);
+
+  useCursor(hovering);
   return (
     <group {...props}>
       <Text
@@ -167,30 +172,28 @@ const Frame = ({ children, texture, name, id, bg = "#000", ...props }) => {
         {name}
       </Text>
 
-      <RoundedBox
-        args={[2, 3, 0.1]}
+      <mesh
         name={id}
-        // name={name}
-
-        radius={0.1}
         onDoubleClick={handleDoubleClick}
+        onPointerEnter={(e) => setHovering(true)}
+        onPointerLeave={(e) => setHovering(false)}
       >
-        <MeshPortalMaterial
-          ref={portalRef}
-          // blend={id === params.id ? 1 : 0}
-          side={THREE.DoubleSide}
-        >
-          <Environment preset="sunset" />
-          <ambientLight intensity={0.5} />
+        {/* <planeGeometry args={[2, 3]} /> */}
+        <RoundedBox args={[2, 3, 0.1]}>
+          <MeshPortalMaterial
+            ref={portalRef}
+            // blend={id === params.id ? 1 : 0}
+            side={THREE.DoubleSide}
+          >
+            <Environment preset="sunset" />
+            <ambientLight intensity={0.5} />
 
-          {children}
-          <mesh ref={sphereMeshRef}>
-            {/* <sphereGeometry args={[1, 64, 64]} />
-            <meshStandardMaterial map={map} side={THREE.BackSide} /> */}
-          </mesh>
-          <color attach="background" args={[bg]} />
-        </MeshPortalMaterial>
-      </RoundedBox>
+            {children}
+            <mesh ref={sphereMeshRef}></mesh>
+            <color attach="background" args={[bg]} />
+          </MeshPortalMaterial>
+        </RoundedBox>
+      </mesh>
     </group>
   );
 };
