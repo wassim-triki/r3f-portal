@@ -13,6 +13,9 @@ import { easing } from "maath";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSnapshot } from "valtio";
 import state from "../store";
+import { HouseAbandoned } from "./HouseAbandoned";
+import { HouseDiorama } from "./HouseDiorama";
+import { HouseCar } from "./HouseCar";
 
 export const Experience = () => {
   return (
@@ -29,49 +32,50 @@ export const Experience = () => {
         // texture={"/textures/ionia.jpg"}
         position-x={-2.5}
         rotation-y={0.7}
-        name={"fuck"}
+        name={"01"}
         id="01"
-        bg="#135BA4"
+        bg="#E3D7A1"
       >
-        <FrameScene color="#26547c" />
+        <FrameScene
+          color="#ffd166"
+          object={HouseCar}
+          scale={0.3}
+          position={[0, -0.5, -1.5]}
+          rotation-y={degToRad(-45)}
+        />
         {/* <FrameScene /> */}
       </Frame>
-      <Frame
-        // texture={"/textures/desert.jpeg"}
-        position-x={0}
-        name={"this"}
-        id="02"
-        bg="#EC5D99"
-      >
-        <FrameScene color="#ef476f" />
-        {/* <FrameScene /> */}
+      <Frame position-x={0} name={"02"} id="02" bg="#EC5D99">
+        <FrameScene
+          color="#ef476f"
+          object={HouseDiorama}
+          scale={0.004}
+          position={[0, -0.5, -1.5]}
+        />
       </Frame>
 
       <Frame
-        // texture={"/textures/purple.jpeg"}
+        // texture={"/texture
         position-x={2.5}
         rotation-y={-0.7}
-        name={"shit"}
+        name={"03"}
         id="03"
-        bg="#E3D7A1"
+        bg="#B7BACB"
       >
-        <FrameScene color="#ffd166" />
+        <FrameScene
+          // color="#26547c"
+          color="#A8A3A5"
+          object={HouseAbandoned}
+          scale={0.15}
+          position={[0, -0.5, -1.5]}
+        />
         {/* <FrameScene /> */}
       </Frame>
-      {/* <Frame
-        texture={"/textures/desert.jpeg"}
-        position-x={0}
-        name={"this"}
-        id="02"
-        bg="#d1d1ca"
-      >
-        <Gltf src="/models/still.glb" scale={2} position={[0, -0.8, -4]} />
-      </Frame> */}
     </>
   );
 };
 
-const FrameScene = ({ color = "#fff" }) => {
+const FrameScene = ({ color = "#fff", object: Object, ...props }) => {
   const targetRef = useRef(null);
   const spotLightRef = useRef(null);
   const defaultTarget = new THREE.Vector3(0, 0, 0);
@@ -84,29 +88,30 @@ const FrameScene = ({ color = "#fff" }) => {
   }, [targetRef.current, spotLightRef.current]);
   return (
     <>
-      <mesh ref={targetRef} position={[0, -0.5, -1]} castShadow>
+      {/* <mesh ref={targetRef} position={[0, -0.5, -1]} castShadow>
         <boxGeometry />
         <meshStandardMaterial color={color} />
-      </mesh>
+      </mesh> */}
+      <Object {...props} />
       <spotLight
         castShadow
         ref={spotLightRef}
-        args={["#fff", 0.2, 7, degToRad(80), 0.5, 0.6]}
+        args={["#fff", 0.3, 7, degToRad(80), 0.5, 0.6]}
         position={[1, 1.5, -2]}
       />
       <spotLight
         castShadow
         ref={spotLightRef}
-        args={["#fff", 0.2, 7, degToRad(80), 0.5, 0.6]}
+        args={["#fff", 0.3, 7, degToRad(80), 0.5, 0.6]}
         position={[-1, 1.5, -2]}
       />
       <spotLight
         castShadow
         ref={spotLightRef}
-        args={["#fff", 0.2, 7, degToRad(80), 0.5, 0.5]}
+        args={["#fff", 0.3, 7, degToRad(80), 0.5, 0.5]}
         position={[0, 1.5, 1]}
       />
-      <mesh position={[0, -1, -1.5]} rotation-x={-1.57} receiveShadow>
+      <mesh position={[0, -0.52, -1.5]} rotation-x={-1.57} receiveShadow>
         <planeGeometry args={[20, 20]} />
         {/* <meshBasicMaterial color={color} /> */}
         <meshStandardMaterial color={color} />
@@ -160,7 +165,7 @@ const Frame = ({ children, texture, name, id, bg = "#000", ...props }) => {
         font="/fonts/Poppins/Poppins-Medium.ttf"
         // color={"black"}
         fontSize={0.5}
-        position={[0, 0.75, 0.051]} // modified x and y based on the dimensions of RoundedBox
+        position={[-0.2, 0.75, 0.051]} // modified x and y based on the dimensions of RoundedBox
         anchorX={"right"}
         anchorY={"bottom"}
       >
