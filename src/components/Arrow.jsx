@@ -1,0 +1,22 @@
+import React from "react";
+
+const Arrow = ({ width = 40, height = 40, color = "#ececec" }) => {
+  return (
+    <div className="relative mx-auto mt-5 animate-[propel_5s_infinite]">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill={color}
+        style={{
+          width: `${width}px`,
+          height: `${height}px`,
+        }}
+        className="rotate-180"
+      >
+        <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
+      </svg>
+    </div>
+  );
+};
+
+export default Arrow;

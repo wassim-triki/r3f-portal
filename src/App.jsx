@@ -5,6 +5,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useSnapshot } from "valtio";
 import state from "./store";
+import Arrow from "./components/Arrow";
 
 function App() {
   const { id } = useParams();
@@ -27,6 +28,10 @@ function App() {
       >
         {id ? "< back" : "double click to enter portal"}
       </Link> */}
+
+      {/* <div className="absolute top-[50px] left-[60px]">
+        <span className="arrow"></span>
+      </div> */}
 
       <TextAnimationComponent trigger={snap.inPortal} />
     </>
@@ -60,7 +65,7 @@ function TextAnimationComponent({ trigger }) {
         onComplete: () => {
           gsap.to(inPortalText.current, {
             // top: "50px",
-            left: "100px",
+            left: "65px",
             color: "#ececec",
             duration: 0.75,
             ease: "elastic.out(1, 0.75)",
@@ -104,11 +109,12 @@ function TextAnimationComponent({ trigger }) {
   return (
     <>
       <Link
-        className={`text-[#ececec] left-[-100px] top-[50px] ${styles}`}
+        className={`text-[#ececec] block  left-[-100px] top-[50px] ${styles}`}
         ref={inPortalText}
         to={"/"}
       >
-        Back
+        {/* <span className="arrow"></span> */}
+        <span className="arrow !absolute top-0 left-0"></span>
       </Link>
       <p
         className={`text-[#4e4e4e] top-[-100px] ${styles}`}
