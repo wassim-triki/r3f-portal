@@ -16,8 +16,6 @@ import { easing } from "maath";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSnapshot } from "valtio";
 import state from "../store";
-import { HouseAbandoned } from "./HouseAbandoned";
-import { HouseDiorama } from "./HouseDiorama";
 import { HouseCar } from "./HouseCar";
 import { HouseDiorama2 } from "./HouseDiorama2";
 
@@ -26,8 +24,21 @@ export const Experience = () => {
   const snap = useSnapshot(state);
 
   const objectOneRef = useRef(null);
+
   const objectTwoRef = useRef(null);
+  const spotLightTwoRef = useRef(null);
+
   const objectThreeRef = useRef(null);
+  const spotLightThreeRef = useRef(null);
+
+  useEffect(() => {
+    if (objectTwoRef.current && spotLightTwoRef.current) {
+      spotLightTwoRef.current.target = objectTwoRef.current;
+    }
+    if (objectThreeRef.current && spotLightThreeRef.current) {
+      spotLightThreeRef.current.target = objectThreeRef.current;
+    }
+  }, [spotLightTwoRef, spotLightThreeRef]);
   useEffect(() => {
     state.objectOneRef = objectOneRef;
     state.objectTwoRef = objectTwoRef;
@@ -49,15 +60,13 @@ export const Experience = () => {
       >
         <Gltf
           src="/models/diorama_house2.glb"
-          // src="/models/car_house.glb"
           name="house-01"
           scale={0.03}
-          // scale={0.3}
           position={[0, -0.5, -1]}
           rotation-y={degToRad(45)}
           ref={objectOneRef}
         />
-        <mesh position={[0, -0.52, -1.5]} rotation-x={-1.57} receiveShadow>
+        <mesh position={[0, -1.002, -1.5]} rotation-x={-1.57} receiveShadow>
           <planeGeometry args={[20, 20]} />
           <meshStandardMaterial color="#db3c27" />
         </mesh>
@@ -67,13 +76,21 @@ export const Experience = () => {
           src="/models/diorama_house2.glb"
           name="house-02"
           scale={0.05}
-          position={[0, -0.5, -2.5]}
+          position={[0, -1, -2.5]}
+          rotation-y={0.5}
           ref={objectTwoRef}
+          castShadow
         />
-        <mesh position={[0, -0.52, -1.5]} rotation-x={-1.57} receiveShadow>
+        <mesh position={[0, -1.002, -1.5]} rotation-x={-1.57} receiveShadow>
           <planeGeometry args={[20, 20]} />
           <meshStandardMaterial color="#f7883d" />
         </mesh>
+        <spotLight
+          ref={spotLightTwoRef}
+          castShadow
+          args={["#fff", 0.4, 10, degToRad(40), 0.5, 0.6]}
+          position={[-2, 3, -0.5]}
+        />
       </Frame>
 
       <Frame
@@ -81,29 +98,27 @@ export const Experience = () => {
         rotation-y={degToRad(-45)}
         name={"03"}
         id="03"
-        bg="#1F93D9"
+        bg="#B7BACB"
       >
         <Gltf
           src="/models/abandoned_house.glb"
           name="house-03"
           scale={0.15}
-          position={[0, -0.5, -1.5]}
+          position={[0, -0.99, -1.5]}
           rotation-y={degToRad(-45)}
           ref={objectThreeRef}
+          castShadow
         />
-        <mesh position={[0, -0.52, -1.5]} rotation-x={-1.57} receiveShadow>
+        <mesh position={[0, -1.002, -1.5]} rotation-x={-1.57} receiveShadow>
           <planeGeometry args={[20, 20]} />
-          <meshStandardMaterial color="#007cbe" />
+          <meshStandardMaterial color="#A8A3A5" />
         </mesh>
-        {/* <FrameScene
-          name="house-03"
-          color="#007cbe"
-          object={HouseAbandoned}
-          scale={0.15}
-          position={[0, -0.5, -0.5]}
-          // position={[0, -0.5, -1.5]}
-          rotation-y={degToRad(-45)}
-        /> */}
+        <spotLight
+          ref={spotLightThreeRef}
+          castShadow
+          args={["#fff", 0.5, 10, degToRad(40), 0.5, 0.6]}
+          position={[4, 3, -1]}
+        />
       </Frame>
     </>
   );
@@ -227,65 +242,6 @@ const Frame = ({ children, texture, name, id, bg = "#000", ...props }) => {
   );
 };
 
-// const Rig = ({
-//   position = new THREE.Vector3(0, 0, 4),
-//   focus = new THREE.Vector3(0, 0, 0),
-// }) => {
-//   const snap = useSnapshot(state);
-//   const { controls, scene } = useThree();
-//   const { id } = useParams();
-//   useEffect(() => {
-//     const frame = scene.getObjectByName(id);
-//     if (frame) {
-//       frame.parent.localToWorld(position.set(0, 0.5, 0.25));
-//       frame.parent.localToWorld(focus.set(0, 0, -2));
-//     }
-//     controls?.setLookAt(...position.toArray(), ...focus.toArray(), true);
-//   }, [id, controls, scene]);
-//   return (
-//     <CameraControls makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 2} />
-//   );
-// };
-
-// const Rig = ({}) => {
-//   const snap = useSnapshot(state);
-//   const { controls, scene } = useThree();
-//   const { id } = useParams();
-
-//   useEffect(() => {
-//     const frame = scene.getObjectByName(id);
-
-//     let gltfPosition = new THREE.Vector3();
-//     let focus = new THREE.Vector3(0, 0, -2);
-
-//     // Use the refs to get the GLTF object's world position
-//     switch (id) {
-//       case "01":
-//         state.objectOneRef.current?.getWorldPosition(gltfPosition);
-//         break;
-//       case "02":
-//         state.objectTwoRef.current?.getWorldPosition(gltfPosition);
-//         break;
-//       case "03":
-//         state.objectThreeRef.current?.getWorldPosition(gltfPosition);
-//         break;
-//       default:
-//         break;
-//     }
-
-//     if (frame && gltfPosition) {
-//       frame.parent.localToWorld(gltfPosition.set(0, 0.5, 0.25));
-//       frame.parent.localToWorld(focus.set(0, 0, -5));
-//     }
-
-//     controls?.setLookAt(...gltfPosition.toArray(), ...focus.toArray(), true);
-//   }, [id, controls, scene]);
-
-//   return (
-//     <CameraControls makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 2} />
-//   );
-// };
-
 const Rig = ({}) => {
   const { controls, scene } = useThree();
   const { id } = useParams();
@@ -321,7 +277,7 @@ const Rig = ({}) => {
 
     if (frame && snap.inPortal) {
       targetPosition = new THREE.Vector3();
-      const offset = new THREE.Vector3(0, 0.5, 2);
+      const offset = new THREE.Vector3(0, 0.5, 3);
       frame.getWorldPosition(framePosition);
       const angle = Math.PI - frame.parent.rotation.y;
       const z = -1 * (Math.cos(angle) * gltfLocalPosition.z);
@@ -346,13 +302,6 @@ const Rig = ({}) => {
         true
       );
     }
-
-    // if (gltfPosition) {
-    // controls?.setLookAt(0, 0, 4, ...focus.toArray(), true);
-    // }
-
-    // console.log(gltfPosition);
-    // console.log(targetPosition);
   }, [id, controls, snap]);
 
   return (
