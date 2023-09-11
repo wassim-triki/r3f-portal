@@ -4,11 +4,12 @@ Command: npx gltfjsx@6.2.13 ./public/models/diorama_house2/diorama_house2.gltf -
 Files: ./public/models/diorama_house2/diorama_house2.gltf [11.76KB] > diorama_house2-transformed.glb [1.31MB] (-11004%)
 */
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function HouseDiorama2(props) {
   const { nodes, materials } = useGLTF("/models/diorama_house2.glb");
+
   return (
     <group {...props} dispose={null}>
       <mesh

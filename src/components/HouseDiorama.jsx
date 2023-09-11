@@ -8,11 +8,12 @@ Source: https://sketchfab.com/3d-models/house-diorama-ab85a249815b4d14b5b9a4c60e
 Title: House Diorama
 */
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function HouseDiorama(props) {
   const { nodes, materials } = useGLTF("/models/diorama_house2.glb");
+
   return (
     <group {...props} dispose={null}>
       <mesh

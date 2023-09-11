@@ -1,10 +1,10 @@
 import { Canvas } from "@react-three/fiber";
-import { Experience } from "./components/Experience";
 import { Link, useParams } from "react-router-dom";
 import { Suspense, useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { useSnapshot } from "valtio";
 import state from "./store";
+import { Experience } from "./components/Experience";
 
 function App() {
   const { id } = useParams();
