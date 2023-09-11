@@ -1,6 +1,7 @@
 import {
   CameraControls,
   Environment,
+  Html,
   MeshPortalMaterial,
   RoundedBox,
   Text,
@@ -23,13 +24,9 @@ export const Experience = () => {
       <ambientLight intensity={0.5} />
       <Environment preset="sunset" />
 
-      {/* <OrbitControls /> */}
-      {/* <CameraControls ref={cameraCtrlsRef} /> */}
-
       <Rig />
 
       <Frame
-        // texture={"/textures/ionia.jpg"}
         position-x={-2.5}
         rotation-y={0.7}
         name={"01"}
@@ -43,7 +40,6 @@ export const Experience = () => {
           position={[0, -0.5, -1.5]}
           rotation-y={degToRad(-45)}
         />
-        {/* <FrameScene /> */}
       </Frame>
       <Frame position-x={0} name={"02"} id="02" bg="#EC5D99">
         <FrameScene
@@ -55,7 +51,6 @@ export const Experience = () => {
       </Frame>
 
       <Frame
-        // texture={"/texture
         position-x={2.5}
         rotation-y={-0.7}
         name={"03"}
@@ -63,13 +58,12 @@ export const Experience = () => {
         bg="#B7BACB"
       >
         <FrameScene
-          // color="#26547c"
           color="#A8A3A5"
           object={HouseAbandoned}
           scale={0.15}
           position={[0, -0.5, -1.5]}
+          rotation-y={degToRad(-45)}
         />
-        {/* <FrameScene /> */}
       </Frame>
     </>
   );
