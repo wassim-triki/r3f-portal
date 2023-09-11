@@ -107,20 +107,26 @@ export const Experience = () => {
         rotation-y={degToRad(-45)}
         name={"03"}
         id="03"
-        bg="#5381B1"
+        // bg="#5381B1"
+        bg="#EC5D99"
       >
         <Gltf
-          src="/models/the_owl_house.glb"
+          src="/models/sugarcube_corner.glb"
           name="house-03"
-          scale={0.13}
+          // scale={0.13}
+          scale={0.16}
           position={[0, -1.02, -1.5]}
-          rotation-y={degToRad(0)}
+          // rotation-y={degToRad(0)}
+          rotation-y={degToRad(60)}
           castShadow
           ref={objectThreeRef}
         />
         <mesh position={[0, -1.002, -1.5]} rotation-x={-1.57} receiveShadow>
           <planeGeometry args={[20, 20]} />
-          <meshStandardMaterial color="#4F6F87" />
+          <meshStandardMaterial
+            color="#ef476f"
+            // color="#4F6F87"
+          />
         </mesh>
         <spotLight
           ref={spotLightThreeRef}
