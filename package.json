@@ -12,11 +12,13 @@
     "@react-three/drei": "9.75.0",
     "@react-three/fiber": "8.13.3",
     "@types/three": "0.152.1",
+    "gsap": "^3.12.2",
     "maath": "^0.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0",
-    "three": "0.153.0"
+    "three": "0.153.0",
+    "valtio": "^1.11.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

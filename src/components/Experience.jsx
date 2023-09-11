@@ -11,6 +11,8 @@ import { useEffect, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { easing } from "maath";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSnapshot } from "valtio";
+import state from "../store";
 
 export const Experience = () => {
   return (

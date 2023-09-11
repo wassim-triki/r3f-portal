@@ -2,8 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* src/global.css */
+
+@font-face {
+  font-family: "Poppins Medium";
+  src: url("/fonts/Poppins/Poppins-medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Poppins Black";
+  src: url("/fonts/Poppins/Poppins-Black.ttf") format("truetype");
+}
+
+body {
+  font-family: "Poppins Medium", sans-serif;
+}
+
 body {
   margin: 0;
+  position: relative;
+  font-family: "Poppins Medium", sans-serif;
 }
 #root {
   height: 100vh;
