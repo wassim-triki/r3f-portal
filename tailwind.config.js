@@ -15,6 +15,10 @@ export default {
           "100%": { transform: "translateX(25%)" },
         },
       },
+      colors: {
+        customBlack: "#4e4e4e",
+        customWhite: "#ececec",
+      },
     },
   },
   plugins: [],
