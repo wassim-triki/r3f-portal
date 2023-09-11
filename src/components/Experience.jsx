@@ -24,6 +24,7 @@ export const Experience = () => {
   const snap = useSnapshot(state);
 
   const objectOneRef = useRef(null);
+  const spotLightOneRef = useRef(null);
 
   const objectTwoRef = useRef(null);
   const spotLightTwoRef = useRef(null);
@@ -38,7 +39,10 @@ export const Experience = () => {
     if (objectThreeRef.current && spotLightThreeRef.current) {
       spotLightThreeRef.current.target = objectThreeRef.current;
     }
-  }, [spotLightTwoRef, spotLightThreeRef]);
+    if (objectOneRef.current && spotLightOneRef.current) {
+      spotLightOneRef.current.target = objectOneRef.current;
+    }
+  }, [spotLightTwoRef, spotLightThreeRef, spotLightOneRef]);
   useEffect(() => {
     state.objectOneRef = objectOneRef;
     state.objectTwoRef = objectTwoRef;
@@ -56,20 +60,27 @@ export const Experience = () => {
         rotation-y={degToRad(45)}
         name={"01"}
         id="01"
-        bg="#E2483C"
+        bg="#9DD7E5"
       >
         <Gltf
-          src="/models/diorama_house2.glb"
+          src="/models/cartoon_house.glb"
           name="house-01"
-          scale={0.03}
-          position={[0, -0.5, -1]}
+          scale={0.25}
+          position={[0, 0.08, -1]}
           rotation-y={degToRad(45)}
+          castShadow
           ref={objectOneRef}
         />
         <mesh position={[0, -1.002, -1.5]} rotation-x={-1.57} receiveShadow>
           <planeGeometry args={[20, 20]} />
-          <meshStandardMaterial color="#db3c27" />
+          <meshStandardMaterial color="#62D1DF" />
         </mesh>
+        <spotLight
+          ref={spotLightOneRef}
+          castShadow
+          args={["#fff", 0.4, 10, degToRad(40), 0.5, 0.6]}
+          position={[1, 2, -2]}
+        />
       </Frame>
       <Frame position-x={0} name={"02"} id="02" bg="#E8A663">
         <Gltf
@@ -78,8 +89,8 @@ export const Experience = () => {
           scale={0.05}
           position={[0, -1, -2.5]}
           rotation-y={0.5}
-          ref={objectTwoRef}
           castShadow
+          ref={objectTwoRef}
         />
         <mesh position={[0, -1.002, -1.5]} rotation-x={-1.57} receiveShadow>
           <planeGeometry args={[20, 20]} />
@@ -98,26 +109,26 @@ export const Experience = () => {
         rotation-y={degToRad(-45)}
         name={"03"}
         id="03"
-        bg="#B7BACB"
+        bg="#5381B1"
       >
         <Gltf
-          src="/models/abandoned_house.glb"
+          src="/models/the_owl_house.glb"
           name="house-03"
-          scale={0.15}
-          position={[0, -0.99, -1.5]}
-          rotation-y={degToRad(-45)}
-          ref={objectThreeRef}
+          scale={0.13}
+          position={[0, -1.02, -1.5]}
+          rotation-y={degToRad(0)}
           castShadow
+          ref={objectThreeRef}
         />
         <mesh position={[0, -1.002, -1.5]} rotation-x={-1.57} receiveShadow>
           <planeGeometry args={[20, 20]} />
-          <meshStandardMaterial color="#A8A3A5" />
+          <meshStandardMaterial color="#4F6F87" />
         </mesh>
         <spotLight
           ref={spotLightThreeRef}
           castShadow
           args={["#fff", 0.5, 10, degToRad(40), 0.5, 0.6]}
-          position={[4, 3, -1]}
+          position={[-2, 3, 1]}
         />
       </Frame>
     </>
@@ -250,22 +261,22 @@ const Rig = ({}) => {
   useEffect(() => {
     const frame = scene.getObjectByName(id);
 
-    let gltfLocalPosition = new THREE.Vector3(0, 0, 0);
+    let modelLocalPosition = new THREE.Vector3(0, 0, 0);
     let defaultPosition = new THREE.Vector3(0, 0, 4);
-    let gltfWorldPosition = new THREE.Vector3();
+    let modelWorldPosition = new THREE.Vector3();
     let framePosition = new THREE.Vector3();
     let focus = new THREE.Vector3();
 
     // Use the refs to get the GLTF object's world position directly
     switch (id) {
       case "01":
-        state.objectOneRef.current?.getWorldPosition(gltfLocalPosition);
+        state.objectOneRef?.current?.getWorldPosition(modelLocalPosition);
         break;
       case "02":
-        state.objectTwoRef.current?.getWorldPosition(gltfLocalPosition);
+        state.objectTwoRef?.current?.getWorldPosition(modelLocalPosition);
         break;
       case "03":
-        state.objectThreeRef.current?.getWorldPosition(gltfLocalPosition);
+        state.objectThreeRef?.current?.getWorldPosition(modelLocalPosition);
         break;
       default:
         break;
@@ -280,14 +291,14 @@ const Rig = ({}) => {
       const offset = new THREE.Vector3(0, 0.5, 3);
       frame.getWorldPosition(framePosition);
       const angle = Math.PI - frame.parent.rotation.y;
-      const z = -1 * (Math.cos(angle) * gltfLocalPosition.z);
-      const x = Math.sin(angle) * gltfLocalPosition.z + framePosition.x;
-      gltfWorldPosition.add(new THREE.Vector3(x, 0, z));
+      const z = -1 * (Math.cos(angle) * modelLocalPosition.z);
+      const x = Math.sin(angle) * modelLocalPosition.z + framePosition.x;
+      modelWorldPosition.add(new THREE.Vector3(x, 0, z));
 
-      targetPosition.add(gltfWorldPosition);
+      targetPosition.add(modelWorldPosition);
       targetPosition.add(offset);
 
-      frame.parent.localToWorld(focus.set(0, 0, gltfLocalPosition.z));
+      frame.parent.localToWorld(focus.set(0, 0, modelLocalPosition.z));
     }
     if (targetPosition) {
       controls?.setLookAt(
