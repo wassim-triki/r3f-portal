@@ -89,7 +89,7 @@ function TextAnimationComponent({ isInsidePortal }) {
         <span className="arrow !absolute top-0 left-0"></span>
       </Link>
       <p
-        className={`${commonStyles} text-customBlack top-[-100px]`}
+        className={`${commonStyles} text-customBlack top-[-100px] text-xl md:text-3xl lg:3xl  text-center w-full`}
         ref={outOfPortalText}
       >
         Double click a portal !
