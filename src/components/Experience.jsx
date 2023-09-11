@@ -16,8 +16,6 @@ import { easing } from "maath";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSnapshot } from "valtio";
 import state from "../store";
-import { HouseCar } from "./HouseCar";
-import { HouseDiorama2 } from "./HouseDiorama2";
 
 export const Experience = () => {
   const { scene } = useThree();
