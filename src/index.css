@@ -12,6 +12,10 @@
   font-family: "Poppins Black";
   src: url("/fonts/Poppins/Poppins-Black.ttf") format("truetype");
 }
+@font-face {
+  font-family: "Poppins Light";
+  src: url("/fonts/Poppins/Poppins-Light.ttf") format("truetype");
+}
 
 body {
   font-family: "Poppins Medium", sans-serif;

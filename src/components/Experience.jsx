@@ -59,6 +59,7 @@ export const Experience = () => {
         name={"01"}
         id="01"
         bg="#9DD7E5"
+        author={"nufnu1337"}
       >
         <Gltf
           src="/models/cartoon_house.glb"
@@ -80,7 +81,7 @@ export const Experience = () => {
           position={[1, 2, -2]}
         />
       </Frame>
-      <Frame position-x={0} name={"02"} id="02" bg="#E8A663">
+      <Frame position-x={0} name={"02"} id="02" bg="#E8A663" author={"Stir17"}>
         <Gltf
           src="/models/diorama_house2.glb"
           name="house-02"
@@ -107,8 +108,8 @@ export const Experience = () => {
         rotation-y={degToRad(-45)}
         name={"03"}
         id="03"
-        // bg="#5381B1"
         bg="#EC5D99"
+        author={"discopears"}
       >
         <Gltf
           src="/models/sugarcube_corner.glb"
@@ -182,7 +183,15 @@ function degToRad(deg) {
   return deg * (Math.PI / 180);
 }
 
-const Frame = ({ children, texture, name, id, bg = "#000", ...props }) => {
+const Frame = ({
+  children,
+  texture,
+  name,
+  id,
+  author,
+  bg = "#000",
+  ...props
+}) => {
   // const map = useTexture(texture);
 
   const portalRef = useRef(null);
@@ -221,14 +230,34 @@ const Frame = ({ children, texture, name, id, bg = "#000", ...props }) => {
   return (
     <group {...props}>
       <Text
-        font="/fonts/Poppins/Poppins-Medium.ttf"
-        // color={"black"}
-        fontSize={0.5}
-        position={[-0.2, 0.75, 0.051]} // modified x and y based on the dimensions of RoundedBox
-        anchorX={"right"}
-        anchorY={"bottom"}
+        font="/fonts/Poppins/Poppins-Black.ttf"
+        // position={[-0.2, 0.75, 0.051]}
+        fontSize={0.2}
+        anchorY="top"
+        position={[-0.3, 1.35, 0.051]}
+        material-toneMapped={false}
       >
-        {name}
+        {bg}
+      </Text>
+      <Text
+        font="/fonts/Poppins/Poppins-Light.ttf"
+        // position={[-0.2, 0.75, 0.051]}
+        fontSize={0.1}
+        anchorX="left"
+        position={[-0.8, -1.28, 0.051]}
+        material-toneMapped={false}
+      >
+        by {author}
+      </Text>
+      <Text
+        font="/fonts/Poppins/Poppins-Light.ttf"
+        // position={[-0.2, 0.75, 0.051]}
+        fontSize={0.2}
+        anchorX="right"
+        position={[0.8, -1.25, 0.051]}
+        material-toneMapped={false}
+      >
+        /{id}
       </Text>
 
       <mesh
