@@ -18,6 +18,7 @@ import state from "../store";
 import { HouseAbandoned } from "./HouseAbandoned";
 import { HouseDiorama } from "./HouseDiorama";
 import { HouseCar } from "./HouseCar";
+import { HouseDiorama2 } from "./HouseDiorama2";
 
 export const Experience = () => {
   return (
@@ -32,21 +33,21 @@ export const Experience = () => {
         rotation-y={0.7}
         name={"01"}
         id="01"
-        bg="#E3D7A1"
+        bg="#E2483C"
       >
         <FrameScene
-          color="#ffd166"
+          color="#db3c27"
           object={HouseCar}
           scale={0.3}
           position={[0, -0.5, -1.5]}
           rotation-y={degToRad(-45)}
         />
       </Frame>
-      <Frame position-x={0} name={"02"} id="02" bg="#EC5D99">
+      <Frame position-x={0} name={"02"} id="02" bg="#E8A663">
         <FrameScene
-          color="#ef476f"
-          object={HouseDiorama}
-          scale={0.004}
+          color="#f7883d"
+          object={HouseDiorama2}
+          scale={0.05}
           position={[0, -0.5, -1.5]}
         />
       </Frame>
@@ -56,10 +57,10 @@ export const Experience = () => {
         rotation-y={-0.7}
         name={"03"}
         id="03"
-        bg="#B7BACB"
+        bg="#1F93D9"
       >
         <FrameScene
-          color="#A8A3A5"
+          color="#007cbe"
           object={HouseAbandoned}
           scale={0.15}
           position={[0, -0.5, -1.5]}

@@ -12,7 +12,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function HouseDiorama(props) {
-  const { nodes, materials } = useGLTF("/models/diorama_house.glb");
+  const { nodes, materials } = useGLTF("/models/diorama_house2.glb");
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -63,4 +63,4 @@ export function HouseDiorama(props) {
   );
 }
 
-useGLTF.preload("/models/diorama_house.glb");
+useGLTF.preload("/models/diorama_house2.glb");
