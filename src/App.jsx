@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import { Experience } from "./components/Experience";
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { Suspense, useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { useSnapshot } from "valtio";
 import state from "./store";
@@ -16,14 +16,23 @@ function App() {
 
   return (
     <>
-      <Canvas
-        frameloop="demand"
-        shadows
-        camera={{ fov: 75, position: [0, 0, 20] }}
+      <Suspense
+        fallback={
+          <span className="text-black absolute left-1/2 top-1/2 -translate-x-1/2 text-3xl">
+            Loading...
+          </span>
+        }
       >
-        <color attach="background" args={["#ececec"]} />
-        <Experience />
-      </Canvas>
+        <Canvas
+          frameloop="demand"
+          shadows
+          camera={{ fov: 75, position: [0, 0, 20] }}
+        >
+          <color attach="background" args={["#ececec"]} />
+          <Experience />
+        </Canvas>
+      </Suspense>
+
       <TextAnimationComponent isInsidePortal={snap.inPortal} />
     </>
   );
