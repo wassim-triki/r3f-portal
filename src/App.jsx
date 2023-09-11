@@ -16,7 +16,11 @@ function App() {
 
   return (
     <>
-      <Canvas shadows camera={{ fov: 75, position: [0, 0, 20] }}>
+      <Canvas
+        frameloop="demand"
+        shadows
+        camera={{ fov: 75, position: [0, 0, 20] }}
+      >
         <color attach="background" args={["#ececec"]} />
         <Experience />
       </Canvas>
@@ -79,7 +83,7 @@ function TextAnimationComponent({ isInsidePortal }) {
         className={`${commonStyles} text-customBlack top-[-100px]`}
         ref={outOfPortalText}
       >
-        Double click a portal
+        Double click a portal !
       </p>
     </>
   );

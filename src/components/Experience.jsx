@@ -146,6 +146,7 @@ const Frame = ({ children, texture, name, id, bg = "#000", ...props }) => {
   }
 
   useFrame((_state, delta) => {
+    console.log("frame");
     easing.damp(portalRef.current, "blend", isActive ? 1 : 0, 0.2, delta);
 
     // Calculate the target scale based on isActive
