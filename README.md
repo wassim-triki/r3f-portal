@@ -1,6 +1,6 @@
 # R3F Portals
 
-An experimental project using `@react-three/fiber` (R3F) to play with `MeshPortalMaterial`. This project is a learning exercise for understanding the capabilities of R3F and how to integrate various components from `@react-three/drei` such as `MeshPortalMaterial`, `CameraControls`, `Environment`, and more.
+An experimental project created using `npx create-vite` using `@react-three/fiber` (R3F) to play with `MeshPortalMaterial`. This project is a learning exercise for understanding the capabilities of R3F and how to integrate various components from `@react-three/drei` such as `MeshPortalMaterial`, `CameraControls`, `Environment`, and more.
 
 ## Features
 - Integration with R3F and Drei components.
@@ -8,18 +8,18 @@ An experimental project using `@react-three/fiber` (R3F) to play with `MeshPorta
 - Mesh portal material effects with active state animation.
 
 ## Demo
-[![Watch the video]([https://shorturl.at/tRVZ4](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbG43N3U1bHhobWo1NDNkcHV5bzBjZHA1OGdsbGZzcWlzY3RnazZlbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7pnxUlT4tC2JjhcfJb/giphy.gif))](https://youtu.be/ohke15atV_o)
+[![Watch the video](https://res.cloudinary.com/dnhlgfdi2/image/upload/v1694542983/Portals-2x_xv9noz.gif)](https://youtu.be/ohke15atV_o)
 
 
 ## Installation & Setup
 1. Clone this repository:
     ```bash
-    git clone <your_repository_link>
+    git clone https://github.com/wassim-triki/r3f-portal.git
     ```
 
 2. Navigate to the project directory:
     ```bash
-    cd <your_project_directory>
+    cd r3f-portals
     ```
 
 3. Install the necessary packages:
@@ -29,7 +29,7 @@ An experimental project using `@react-three/fiber` (R3F) to play with `MeshPorta
 
 4. Run the project:
     ```bash
-    npm start
+    npm run dev
     ```
 
 ## Dependencies
