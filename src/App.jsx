@@ -7,6 +7,7 @@ import state from "./store";
 import { Experience } from "./components/Experience";
 
 import { ReactComponent as Mouse2Icon } from "./assets/mouse2.svg";
+import { ReactComponent as GithubIcon } from "./assets/github.svg";
 import {
   Html,
   Loader,
@@ -127,10 +128,16 @@ function TextAnimationComponent({ isInsidePortal }) {
 const Footer = () => {
   return (
     <footer className="absolute w-full bottom-0 left-0   font-poppins font-light text-customBlack">
-      <div className="absolute md:left-16 left-10 md:bottom-10 bottom-5 text-sm flex gap-1 items-center">
+      <div className="absolute md:left-16 left-10 md:bottom-10 bottom-5 text-sm">
         {/* <LinkIcon className="w-4 h-4" /> */}
         {/* <span className=""> 2023 &copy; Wassim Triki</span> */}
-        <span className="">Wassim Triki</span>
+        <Link
+          className="flex gap-1 items-center"
+          to={"https://github.com/wassim-triki/r3f-portals"}
+        >
+          <GithubIcon className="w-5 h-5" />
+          <p className="whitespace-nowrap">Wassim Triki</p>
+        </Link>
       </div>
       <div className="absolute md:right-16 right-10 md:bottom-10 bottom-5 text-sm">
         09/12/2023
