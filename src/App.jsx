@@ -10,6 +10,7 @@ import { ReactComponent as MouseIcon } from "./assets/mouse.svg";
 import { ReactComponent as Mouse2Icon } from "./assets/mouse2.svg";
 import { CustomEase } from "gsap/all";
 import { Html, Loader, useProgress } from "@react-three/drei";
+import { LinkIcon } from "@heroicons/react/24/solid";
 
 function App() {
   const { id } = useParams();
@@ -45,6 +46,7 @@ function App() {
       </Canvas>
       <Loader />
       <TextAnimationComponent isInsidePortal={snap.inPortal} />
+      <Footer />
     </>
   );
 }
@@ -114,5 +116,19 @@ function TextAnimationComponent({ isInsidePortal }) {
     </>
   );
 }
+
+const Footer = () => {
+  return (
+    <footer className="absolute w-full bottom-0 left-0   font-poppins font-light text-customBlack">
+      <div className="absolute md:left-16 left-10 bottom-10 text-sm flex gap-1 items-center">
+        {/* <LinkIcon className="w-4 h-4" /> */}
+        <span className=""> 2023 &copy; Wassim Triki</span>
+      </div>
+      <div className="absolute md:right-16 right-10 bottom-10 text-sm">
+        09/12/2023
+      </div>
+    </footer>
+  );
+};
 
 export default App;
