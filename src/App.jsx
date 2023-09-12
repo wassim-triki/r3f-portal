@@ -25,23 +25,17 @@ function App() {
 
   return (
     <>
-      <Canvas
-        frameloop="demand"
-        shadows
-        camera={{ fov: 75, position: [0, 0, 20] }}
-      >
-        <color attach="background" args={["#ececec"]} />
-        <Suspense
-          fallback={
-            // <Html className="text-black absolute left-1/2 top-1/2 -translate-x-1/2 text-3xl">
-            //   Loading...
-            // </Html>
-            null
-          }
+      <Suspense>
+        <Canvas
+          frameloop="demand"
+          shadows
+          camera={{ fov: 75, position: [0, 0, 20] }}
         >
+          <color attach="background" args={["#ececec"]} />
+
           <Experience />
-        </Suspense>
-      </Canvas>
+        </Canvas>
+      </Suspense>
       <Loader />
       <TextAnimationComponent isInsidePortal={snap.inPortal} />
       <Footer />
