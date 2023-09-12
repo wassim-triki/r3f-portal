@@ -24,13 +24,19 @@ body {
   font-family: "Poppins Medium", sans-serif;
 }
 
+html {
+  overflow: hidden;
+  width: 100%;
+}
+
 body {
   margin: 0;
-  position: relative;
+  /* position: relative; */
   font-family: "Poppins Medium", sans-serif;
+  height: 100%;
   position: fixed;
-  height: 100vh;
-  /* overflow: hidden; */
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 #root {
   height: 100%;
