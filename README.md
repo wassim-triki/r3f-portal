@@ -2,13 +2,9 @@
 
 An experimental project created using `npx create-vite` using `@react-three/fiber` (R3F) to play with `MeshPortalMaterial`. This project is a learning exercise for understanding the capabilities of R3F and how to integrate various components from `@react-three/drei` such as `MeshPortalMaterial`, `CameraControls`, `Environment`, and more.
 
-## Features
-- Integration with R3F and Drei components.
-- Scene setup with dynamic lighting and environment.
-- Mesh portal material effects with active state animation.
 
 ## Demo
-[![Watch the video](https://res.cloudinary.com/dnhlgfdi2/image/upload/v1694542983/Portals-2x_xv9noz.gif)](https://youtu.be/ohke15atV_o)
+[![Watch the video](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbG43N3U1bHhobWo1NDNkcHV5bzBjZHA1OGdsbGZzcWlzY3RnazZlbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7pnxUlT4tC2JjhcfJb/giphy-downsized.gif)](https://youtu.be/ohke15atV_o)
 
 
 ## Installation & Setup
