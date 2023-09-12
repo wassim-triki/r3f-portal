@@ -9,34 +9,41 @@ import { Experience } from "./components/Experience";
 import { ReactComponent as MouseIcon } from "./assets/mouse.svg";
 import { ReactComponent as Mouse2Icon } from "./assets/mouse2.svg";
 import { CustomEase } from "gsap/all";
+import { Html, Loader, useProgress } from "@react-three/drei";
 
 function App() {
   const { id } = useParams();
   const snap = useSnapshot(state);
 
+  const progress = useProgress();
+
   useEffect(() => {
     state.inPortal = Boolean(id);
   }, [id]);
+  useEffect(() => {
+    console.log(progress);
+  }, [progress]);
 
   return (
     <>
-      <Suspense
-        fallback={
-          <span className="text-black absolute left-1/2 top-1/2 -translate-x-1/2 text-3xl">
-            Loading...
-          </span>
-        }
+      <Canvas
+        frameloop="demand"
+        shadows
+        camera={{ fov: 75, position: [0, 0, 20] }}
       >
-        <Canvas
-          frameloop="demand"
-          shadows
-          camera={{ fov: 75, position: [0, 0, 20] }}
+        <color attach="background" args={["#ececec"]} />
+        <Suspense
+          fallback={
+            // <Html className="text-black absolute left-1/2 top-1/2 -translate-x-1/2 text-3xl">
+            //   Loading...
+            // </Html>
+            null
+          }
         >
-          <color attach="background" args={["#ececec"]} />
           <Experience />
-        </Canvas>
-      </Suspense>
-
+        </Suspense>
+      </Canvas>
+      <Loader />
       <TextAnimationComponent isInsidePortal={snap.inPortal} />
     </>
   );

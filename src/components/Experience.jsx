@@ -3,6 +3,7 @@ import {
   Environment,
   Gltf,
   Html,
+  Loader,
   MeshPortalMaterial,
   RoundedBox,
   Text,
@@ -16,6 +17,7 @@ import { easing } from "maath";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSnapshot } from "valtio";
 import state from "../store";
+import { Suspense } from "react";
 
 export const Experience = () => {
   const { scene } = useThree();
@@ -91,6 +93,7 @@ export const Experience = () => {
           castShadow
           ref={objectTwoRef}
         />
+
         <mesh position={[0, -1.002, -1.5]} rotation-x={-1.57} receiveShadow>
           <planeGeometry args={[20, 20]} />
           <meshStandardMaterial color="#f7883d" />

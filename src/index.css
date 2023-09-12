@@ -28,6 +28,7 @@ body {
   margin: 0;
   position: relative;
   font-family: "Poppins Medium", sans-serif;
+  /* overflow: hidden; */
 }
 #root {
   height: 100vh;
