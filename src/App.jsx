@@ -37,7 +37,7 @@ function App() {
           camera={{ fov: 75, position: [0, 0, 20] }}
         >
           <PerformanceMonitor
-            onIncline={() => setDpr(2)}
+            // onIncline={() => setDpr(1.5)}
             onDecline={() => setDpr(1)}
             // onChange={({ fps }) => console.log(fps)}
           />
