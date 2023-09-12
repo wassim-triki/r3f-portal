@@ -18,7 +18,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0",
     "three": "0.153.0",
-    "valtio": "^1.11.2"
+    "valtio": "^1.11.2",
+    "vite-plugin-svgr": "^3.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

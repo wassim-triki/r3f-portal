@@ -14,9 +14,16 @@ export default {
           "60%": { transform: "translateX(-25%)" },
           "100%": { transform: "translateX(25%)" },
         },
+        doubleClick: {
+          "0%": { scale: 1 },
+          "25%": { scale: 1.2 },
+          "50%": { scale: 1 },
+          "75%": { scale: 1.2 },
+          "100%": { scale: 1 },
+        },
       },
       colors: {
-        customBlack: "#4e4e4e",
+        customBlack: "#2b2d42",
         customWhite: "#ececec",
       },
     },

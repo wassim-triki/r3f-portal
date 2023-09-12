@@ -6,6 +6,10 @@ import { useSnapshot } from "valtio";
 import state from "./store";
 import { Experience } from "./components/Experience";
 
+import { ReactComponent as MouseIcon } from "./assets/mouse.svg";
+import { ReactComponent as Mouse2Icon } from "./assets/mouse2.svg";
+import { CustomEase } from "gsap/all";
+
 function App() {
   const { id } = useParams();
   const snap = useSnapshot(state);
@@ -39,16 +43,16 @@ function App() {
 }
 
 function TextAnimationComponent({ isInsidePortal }) {
-  const commonStyles =
-    "text-3xl absolute font-poppins font-black left-1/2 -translate-x-1/2";
+  const commonStyles = " absolute font-poppins  left-1/2 -translate-x-1/2";
 
   const inPortalText = useRef(null);
   const outOfPortalText = useRef(null);
+  const mouseIconRef = useRef(null);
 
   useLayoutEffect(() => {
     if (isInsidePortal) {
       gsap.to(outOfPortalText.current, {
-        top: "-100px",
+        top: "-120px",
         color: "#ececec",
         duration: 0.35,
         ease: "elastic.in(1, 0.75)",
@@ -69,7 +73,7 @@ function TextAnimationComponent({ isInsidePortal }) {
         ease: "elastic.in(1, 0.75)",
         onComplete: () => {
           gsap.to(outOfPortalText.current, {
-            top: "50px",
+            top: "40px",
             color: "#4e4e4e",
             duration: 0.75,
             ease: "elastic.out(1,0.75)",
@@ -77,7 +81,7 @@ function TextAnimationComponent({ isInsidePortal }) {
         },
       });
     }
-  }, [isInsidePortal]);
+  }, [isInsidePortal, inPortalText, outOfPortalText, mouseIconRef]);
 
   return (
     <>
@@ -89,10 +93,16 @@ function TextAnimationComponent({ isInsidePortal }) {
         <span className="arrow !absolute top-0 left-0"></span>
       </Link>
       <p
-        className={`${commonStyles} text-customBlack top-[-100px] text-xl md:text-3xl lg:3xl  text-center w-full`}
+        className={`${commonStyles} text-[customBlack] font-light md:text-xl   text-center w-full flex justify-center items-center gap-1 flex-col text-sm`}
         ref={outOfPortalText}
       >
-        Double click a portal !
+        <span ref={mouseIconRef}>
+          <Mouse2Icon className="w-10 h-10 lg:w-20 lg:h-20 animate-bounce" />{" "}
+          {/* <MouseIcon className="w-10 h-10 sanimate-bounce " />{" "} */}
+        </span>
+        <span>
+          double click on a <span className="font-medium">portal </span>
+        </span>
       </p>
     </>
   );
