@@ -6,9 +6,7 @@ import { useSnapshot } from "valtio";
 import state from "./store";
 import { Experience } from "./components/Experience";
 
-import { ReactComponent as MouseIcon } from "./assets/mouse.svg";
 import { ReactComponent as Mouse2Icon } from "./assets/mouse2.svg";
-import { CustomEase } from "gsap/all";
 import { Html, Loader, useProgress } from "@react-three/drei";
 import { LinkIcon } from "@heroicons/react/24/solid";
 
@@ -113,7 +111,6 @@ function TextAnimationComponent({ isInsidePortal }) {
       >
         <span ref={mouseIconRef}>
           <Mouse2Icon className="w-10 h-10 lg:w-20 lg:h-20 animate-bounce" />{" "}
-          {/* <MouseIcon className="w-10 h-10 sanimate-bounce " />{" "} */}
         </span>
         <span>
           double click on a <span className="font-medium">portal </span>
