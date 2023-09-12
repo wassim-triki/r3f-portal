@@ -8,7 +8,7 @@ An experimental project using `@react-three/fiber` (R3F) to play with `MeshPorta
 - Mesh portal material effects with active state animation.
 
 ## Demo
-[![Watch the video](https://shorturl.at/tRVZ4)](https://youtu.be/ohke15atV_o)
+[![Watch the video]([https://shorturl.at/tRVZ4](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbG43N3U1bHhobWo1NDNkcHV5bzBjZHA1OGdsbGZzcWlzY3RnazZlbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7pnxUlT4tC2JjhcfJb/giphy.gif))](https://youtu.be/ohke15atV_o)
 
 
 ## Installation & Setup
