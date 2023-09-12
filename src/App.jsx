@@ -22,8 +22,8 @@ function App() {
     state.inPortal = Boolean(id);
   }, [id]);
   useEffect(() => {
-    console.log(progress);
-  }, [progress]);
+    console.log(snap.inPortal);
+  }, [snap.inPortal]);
 
   return (
     <>
@@ -53,13 +53,13 @@ function App() {
 
 function TextAnimationComponent({ isInsidePortal }) {
   const commonStyles = " absolute font-poppins  left-1/2 -translate-x-1/2";
-
+  const snap = useSnapshot(state);
   const inPortalText = useRef(null);
   const outOfPortalText = useRef(null);
   const mouseIconRef = useRef(null);
 
   useLayoutEffect(() => {
-    if (isInsidePortal) {
+    if (snap.inPortal) {
       gsap.to(outOfPortalText.current, {
         top: "-120px",
         color: "#ececec",
@@ -90,7 +90,13 @@ function TextAnimationComponent({ isInsidePortal }) {
         },
       });
     }
-  }, [isInsidePortal, inPortalText, outOfPortalText, mouseIconRef]);
+  }, [
+    isInsidePortal,
+    inPortalText,
+    outOfPortalText,
+    mouseIconRef,
+    snap.inPortal,
+  ]);
 
   return (
     <>
@@ -120,11 +126,11 @@ function TextAnimationComponent({ isInsidePortal }) {
 const Footer = () => {
   return (
     <footer className="absolute w-full bottom-0 left-0   font-poppins font-light text-customBlack">
-      <div className="absolute md:left-16 left-10 bottom-10 text-sm flex gap-1 items-center">
+      <div className="absolute md:left-16 left-10 md:bottom-10 bottom-5 text-sm flex gap-1 items-center">
         {/* <LinkIcon className="w-4 h-4" /> */}
         <span className=""> 2023 &copy; Wassim Triki</span>
       </div>
-      <div className="absolute md:right-16 right-10 bottom-10 text-sm">
+      <div className="absolute md:right-16 right-10 md:bottom-10 bottom-5 text-sm">
         09/12/2023
       </div>
     </footer>
