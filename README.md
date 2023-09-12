@@ -10,7 +10,7 @@ An experimental project created using `npx create-vite` using `@react-three/fibe
 ## Installation & Setup
 1. Clone this repository:
     ```bash
-    git clone https://github.com/wassim-triki/r3f-portal.git
+    git clone https://github.com/wassim-triki/r3f-portals.git
     ```
 
 2. Navigate to the project directory:
