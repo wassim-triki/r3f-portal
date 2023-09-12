@@ -129,7 +129,8 @@ const Footer = () => {
     <footer className="absolute w-full bottom-0 left-0   font-poppins font-light text-customBlack">
       <div className="absolute md:left-16 left-10 md:bottom-10 bottom-5 text-sm flex gap-1 items-center">
         {/* <LinkIcon className="w-4 h-4" /> */}
-        <span className=""> 2023 &copy; Wassim Triki</span>
+        {/* <span className=""> 2023 &copy; Wassim Triki</span> */}
+        <span className="">Wassim Triki</span>
       </div>
       <div className="absolute md:right-16 right-10 md:bottom-10 bottom-5 text-sm">
         09/12/2023
