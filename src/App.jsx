@@ -1,36 +1,46 @@
 import { Canvas } from "@react-three/fiber";
 import { Link, useParams } from "react-router-dom";
-import { Suspense, useEffect, useLayoutEffect, useRef } from "react";
+import { Suspense, useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useSnapshot } from "valtio";
 import state from "./store";
 import { Experience } from "./components/Experience";
 
 import { ReactComponent as Mouse2Icon } from "./assets/mouse2.svg";
-import { Html, Loader, useProgress } from "@react-three/drei";
+import {
+  Html,
+  Loader,
+  PerformanceMonitor,
+  usePerformanceMonitor,
+  useProgress,
+} from "@react-three/drei";
 import { LinkIcon } from "@heroicons/react/24/solid";
 
 function App() {
   const { id } = useParams();
   const snap = useSnapshot(state);
 
+  const [dpr, setDpr] = useState(1.5);
   const progress = useProgress();
 
   useEffect(() => {
     state.inPortal = Boolean(id);
   }, [id]);
-  useEffect(() => {
-    console.log(snap.inPortal);
-  }, [snap.inPortal]);
 
   return (
     <>
       <Suspense>
         <Canvas
+          dpr={dpr}
           frameloop="demand"
           shadows
           camera={{ fov: 75, position: [0, 0, 20] }}
         >
+          <PerformanceMonitor
+            onIncline={() => setDpr(2)}
+            onDecline={() => setDpr(1)}
+            // onChange={({ fps }) => console.log(fps)}
+          />
           <color attach="background" args={["#ececec"]} />
 
           <Experience />
