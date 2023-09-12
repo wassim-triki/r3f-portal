@@ -61,7 +61,7 @@ export const Experience = () => {
         name={"01"}
         id="01"
         bg="#9DD7E5"
-        author={"nufnu1337"}
+        author={"Deshan"}
       >
         <Gltf
           src="/models/cartoon_house.glb"
@@ -83,7 +83,13 @@ export const Experience = () => {
           position={[1, 2, -2]}
         />
       </Frame>
-      <Frame position-x={0} name={"02"} id="02" bg="#E8A663" author={"Stir17"}>
+      <Frame
+        position-x={0}
+        name={"02"}
+        id="02"
+        bg="#E8A663"
+        author={"Pau Torres"}
+      >
         <Gltf
           src="/models/diorama_house2.glb"
           name="house-02"
@@ -112,7 +118,7 @@ export const Experience = () => {
         name={"03"}
         id="03"
         bg="#EC5D99"
-        author={"discopears"}
+        author={"Olivia Sabatka"}
       >
         <Gltf
           src="/models/sugarcube_corner.glb"
@@ -234,7 +240,6 @@ const Frame = ({
     <group {...props}>
       <Text
         font="/fonts/Poppins/Poppins-Black.ttf"
-        // position={[-0.2, 0.75, 0.051]}
         fontSize={0.2}
         anchorY="top"
         position={[-0.3, 1.35, 0.051]}
@@ -244,7 +249,6 @@ const Frame = ({
       </Text>
       <Text
         font="/fonts/Poppins/Poppins-Light.ttf"
-        // position={[-0.2, 0.75, 0.051]}
         fontSize={0.1}
         anchorX="left"
         position={[-0.8, -1.28, 0.051]}
@@ -254,7 +258,6 @@ const Frame = ({
       </Text>
       <Text
         font="/fonts/Poppins/Poppins-Light.ttf"
-        // position={[-0.2, 0.75, 0.051]}
         fontSize={0.2}
         anchorX="right"
         position={[0.8, -1.25, 0.051]}
@@ -269,13 +272,8 @@ const Frame = ({
         onPointerEnter={(e) => setHovering(true)}
         onPointerLeave={(e) => setHovering(false)}
       >
-        {/* <planeGeometry args={[2, 3]} /> */}
         <RoundedBox name={`rounded-box-${id}`} args={[2, 3, 0.1]}>
-          <MeshPortalMaterial
-            ref={portalRef}
-            // blend={id === params.id ? 1 : 0}
-            side={THREE.DoubleSide}
-          >
+          <MeshPortalMaterial ref={portalRef} side={THREE.DoubleSide}>
             <Environment preset="sunset" />
             <ambientLight intensity={0.5} />
 
