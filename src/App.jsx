@@ -128,7 +128,7 @@ function TextAnimationComponent({ isInsidePortal }) {
 const Footer = () => {
   return (
     <footer className="absolute w-full bottom-0 left-0   font-poppins font-light text-customBlack">
-      <div className="absolute md:left-16 left-10 md:bottom-10 bottom-5 text-sm">
+      <div className="absolute md:left-16 left-10 md:bottom-10 bottom-8 text-sm">
         {/* <LinkIcon className="w-4 h-4" /> */}
         {/* <span className=""> 2023 &copy; Wassim Triki</span> */}
         <Link
@@ -139,7 +139,7 @@ const Footer = () => {
           <p className="whitespace-nowrap">Wassim Triki</p>
         </Link>
       </div>
-      <div className="absolute md:right-16 right-10 md:bottom-10 bottom-5 text-sm">
+      <div className="absolute md:right-16 right-10 md:bottom-10 bottom-8 text-sm">
         09/12/2023
       </div>
     </footer>
